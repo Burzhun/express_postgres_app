@@ -16,5 +16,11 @@ $ npm run dev
 
 # production mode
 $ npm run start
+
+# списание баланса 
+ /buy?userId=<userId>&productId=<productId>
+
+# получение спсика объектов
+ /items
 ```
 

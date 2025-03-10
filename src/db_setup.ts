@@ -27,6 +27,8 @@ const createTables = async () => {
         )
     `)
 
+    await pool.query(`DELETE from purchase;`)
+
     await pool.query(`
         DELETE from users;
         INSERT INTO users(balance, name) VALUES(1000, 'user1')

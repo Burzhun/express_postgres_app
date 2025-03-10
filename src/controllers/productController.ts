@@ -2,14 +2,20 @@ import userModel from '../models/userModel';
 import productModel from '../models/productModel';
 import { Request, Response } from 'express';
 
+type User = {
+    id:number;
+    name:string;
+    balance: number;
+}
+
 
 const updateUserBalance = async (request: Request, response: Response) => {
     try {
         const userId:number = parseInt(request.query.userId as string);
         const productId:number = parseInt(request.query.productId as string);
         if(userId && productId){
-            const result = await userModel.updateBalance(userId, productId)
-            response.status(200).json(result)
+            const updatedUser:User = await userModel.updateBalance(userId, productId)
+            response.status(200).json(updatedUser)
         }else{
             response.status(200).json({error: 'Empty request'})
         }

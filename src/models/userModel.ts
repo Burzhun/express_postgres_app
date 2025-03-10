@@ -15,7 +15,10 @@ const updateBalance = async (userId:number, productId:number) => {
         const result = await client.query(`UPDATE users SET balance = balance - $1 WHERE id = $2 RETURNING *`,values)
         await client.query(`INSERT INTO purchase (user_id, product_id, price) VALUES ($1, $2, $3) `,purchaseValues)
         await client.query('End')
-        return result
+        if(result?.rows?.length){
+            return result.rows[0]
+        }
+        return {error: 'User not found'}
     }catch(e){
         console.log(e)
         await pool.query('ROLLBACK')
